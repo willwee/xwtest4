@@ -1,0 +1,7 @@
+/target/classes/com/anta/java8/annotationtest/AnnotationDemo.class
+/target/classes/com/anta/java8/misc/Annotations1$Hint.class
+/target/classes/com/anta/java8/misc/Annotations1$Hints.class
+*.class
+/.idea/*
+/target/*
+/*.iml
