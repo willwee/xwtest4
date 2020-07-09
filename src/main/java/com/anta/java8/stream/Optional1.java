@@ -10,6 +10,11 @@ import java.util.Optional;
  */
 public class Optional1 {
 
+
+    //Optional.of(T value),当value值为null时，会报NullPointerException异常
+    //Optional.ofNullable(T value),当value值为null时，会直接返回一个EMPTY对象。
+    //ifPresent(T value),就是value值不为空时，做的一些操作。
+    //isPresent(T value),判断value值是否为空。
     public static void main(String[] args) {
         Optional<String> optional = Optional.of("bam");
 

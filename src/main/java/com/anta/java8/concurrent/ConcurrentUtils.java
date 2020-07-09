@@ -26,6 +26,7 @@ public class ConcurrentUtils {
 
     public static void sleep(int seconds) {
         try {
+            // 休眠多长时间
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);

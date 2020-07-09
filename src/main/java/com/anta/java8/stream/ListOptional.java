@@ -2,6 +2,7 @@ package com.anta.java8.stream;
 
 import org.junit.Test;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +50,30 @@ public class ListOptional {
             this.areaId = areaId;
         }
     }
+
+
+    /**
+     * 100 笔数据测试结果
+     * LinqUtil 测试性能const:86
+     * java8 stream 测试性能const:10
+     *
+     */
+    @Test
+    public void test1(){
+        long t = Instant.now().toEpochMilli();
+//        List<VirtualParam> paramsList = new ArrayList();
+//        IntStream.range(1,100).forEach(v->{
+//            VirtualParam m = new VirtualParam();
+//            m.setWareHouseId(Long.valueOf(v));
+//            paramsList.add(m);
+//        });
+//
+//        LinqUtil.select(paramsList, s -> s.getWhareaTypeId());
+        System.out.println("测试性能const:"+(Instant.now().toEpochMilli() - t));
+        long t2 = Instant.now().toEpochMilli();
+
+//        List<Long> list = paramsList.stream().map(v -> v.getWareHouseId()).collect(Collectors.toList());
+        System.out.println("测试性能const2:"+(Instant.now().toEpochMilli() - t2));
+    }
+
 }
