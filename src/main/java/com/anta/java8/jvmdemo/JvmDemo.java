@@ -3,6 +3,7 @@ package com.anta.java8.jvmdemo;
 import com.anta.java8.IWTest;
 import org.junit.Test;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -101,6 +102,11 @@ public class JvmDemo implements IWTest {
 		d = c + a;
 		System.out.println("结果为：" + b + "::" + d);
 
+	}
+
+	@Test
+	public void test11() {
+		System.out.println("test git update::"+ Instant.now().getEpochSecond());
 	}
 
 }
