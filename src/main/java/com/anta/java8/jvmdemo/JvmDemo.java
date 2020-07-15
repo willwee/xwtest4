@@ -54,6 +54,8 @@ public class JvmDemo implements IWTest {
 //		CompletableFuture.allOf(f1).join();
 		CompletableFuture.allOf(f2).join();
 
+		System.out.println("test git commit");
+
 		System.out.println("out of service.");
 
 	}
