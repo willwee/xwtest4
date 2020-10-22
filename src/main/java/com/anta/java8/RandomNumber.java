@@ -1,7 +1,9 @@
 package com.anta.java8;
 
+import com.anta.java8.time.DateUtilBs;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -19,6 +21,9 @@ public class RandomNumber implements IWTest {
     public void testIntRandom() {
         Random random = new Random();
         IntStream intStream = random.ints(0,5);
-        intStream.limit(10).forEach(System.out::print);
+//        intStream.limit(20).forEach(System.out::print);
+        Date kk = new Date();
+        Date startTime = DateUtilBs.convertToDate(kk.toString(), DateUtilBs.DEF_DATE_FMT);
+        System.out.println(startTime);
     }
 }

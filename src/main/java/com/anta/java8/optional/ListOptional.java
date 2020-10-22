@@ -1,9 +1,10 @@
-package com.anta.java8.stream;
+package com.anta.java8.optional;
 
 import org.junit.Test;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -74,6 +75,21 @@ public class ListOptional {
 
 //        List<Long> list = paramsList.stream().map(v -> v.getWareHouseId()).collect(Collectors.toList());
         System.out.println("测试性能const2:"+(Instant.now().toEpochMilli() - t2));
+    }
+
+    @Test
+    public void test2(){
+//        List<String> beans = new ArrayList<>();
+//        beans.add("111");
+//        beans.add("222");
+//        beans.add("333");
+//        String[] aa = beans.toArray(new String[0]);
+//        Arrays.stream(aa).forEach(System.out::println);
+        Long ss = 10L;
+
+        List<Long> ids = Arrays.asList(ss);
+
+        System.out.println(ids.size());
     }
 
 }

@@ -50,4 +50,21 @@ public class TimeStamp implements IWTest {
         long t8 = System.currentTimeMillis();
         System.out.printf("Instant.now().getEpochSecond获取方式用时[%s]\n",t8-t7);
     }
+
+    @Test
+    public void test2(){
+        // 能根据时间戳获取正确的时间
+        Long nowtime = Instant.now().getEpochSecond();
+
+        Date date =  new Date(nowtime * 1000);
+
+        System.out.println(nowtime);
+
+        System.out.println(date);
+
+        System.out.println(date.getTime());
+
+        System.out.println(date.getTime()/1000);
+
+    }
 }

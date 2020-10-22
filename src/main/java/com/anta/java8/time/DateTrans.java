@@ -1,6 +1,7 @@
 package com.anta.java8.time;
 
 import com.anta.java8.IWTest;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -8,7 +9,8 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 时间转换
@@ -23,6 +25,125 @@ public class DateTrans implements IWTest {
     public void test51() {
         System.out.println(Instant.now().getEpochSecond());
         System.out.println(Instant.now().toEpochMilli());
+    }
+
+    @Test
+    public void  test55(){
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String format = ldt.format(dtf);
+        System.out.println(format);
+    }
+
+    @Test
+    public void  test56(){
+
+        Set<Long> wareHouseIds = new HashSet<>();
+        wareHouseIds.add(100024L);
+        Set<String> areaIds = new HashSet<>();
+        areaIds.add("100020");
+        Set<Long> skuIds = new HashSet<>();
+        skuIds.add(100024L);
+        Set<Long> whareaTypeIds = new HashSet<>();
+        whareaTypeIds.add(100024L);
+
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT SINGLEPRODUCTID,WAREHOUSEID,WHAREATYPEID, SUM(QTYAVAILABLE) AS QTYAVAILABLE");
+        sqlBuilder.append(" FROM STK_STOCK ");
+        sqlBuilder.append(" WHERE ");
+
+        sqlBuilder.append(" WAREHOUSEID IN (");
+        for (Long wareHouseId : wareHouseIds) {
+            sqlBuilder.append(wareHouseId).append(",");
+        }
+        sqlBuilder.deleteCharAt(sqlBuilder.length() - 1);
+        sqlBuilder.append(")");
+
+        sqlBuilder.append(" AND AREAID IN (");
+        for (String areaId : areaIds) {
+            sqlBuilder.append("'").append(areaId).append("'").append(",");
+        }
+        sqlBuilder.deleteCharAt(sqlBuilder.length() - 1);
+        sqlBuilder.append(")");
+
+        sqlBuilder.append(" AND SINGLEPRODUCTID IN (");
+        for (Long skuId : skuIds) {
+            sqlBuilder.append(skuId).append(",");
+        }
+        sqlBuilder.deleteCharAt(sqlBuilder.length() - 1);
+        sqlBuilder.append(")");
+
+        sqlBuilder.append(" AND WHAREATYPEID IN (");
+        for (Long whareaTypeId : whareaTypeIds) {
+            sqlBuilder.append(whareaTypeId).append(",");
+        }
+        sqlBuilder.deleteCharAt(sqlBuilder.length() - 1);
+        sqlBuilder.append(")");
+
+        sqlBuilder.append(" GROUP BY SINGLEPRODUCTID,WAREHOUSEID,WHAREATYPEID");
+
+        System.out.println(sqlBuilder.toString());
+
+
+    }
+
+   @Test
+    public void test22(){
+       String storeCode =  "AT__00LT2J";
+
+       System.out.println(StringUtils.startsWith(storeCode,"AT_"));
+
+
+       String sto = "ANTA00KR30";
+
+       System.out.println(StringUtils.startsWith(storeCode,"ANTA_"));
+    }
+
+    @Test
+    public void test21(){
+        // 按warehouseid分组
+        List<Map<String,Object>> lists1 = new ArrayList<>();
+
+
+        //--------------lists1--------------------
+        Map<String,Object> h1 = new HashMap<>();
+        h1.put("warehouseid",100035);
+        h1.put("id",7448085565750116353L);
+
+        Map<String,Object> h2 = new HashMap<>();
+        h2.put("warehouseid",100035);
+        h2.put("id",7448085565750116353L);
+
+        lists1.add(h1);
+        lists1.add(h2);
+
+        //--------------lists2--------------------
+
+        Map<String,Object> h3 = new HashMap<>();
+        h3.put("warehouseid",104166);
+        h3.put("id",102232104166L);
+        lists1.add(h3);
+
+//        lists1.stream().map(v->v.).collect(Collectors.toList());
+
+        //测试
+        //mergeKey="name";
+
+//        lists1.parallelStream().forEach(x->{
+//
+//                    Map<String, Object> y2 = lists2.parallelStream().filter(y->y.get(mergeKey).toString().equals(x.get(mergeKey).toString()))
+//                            .findFirst().get();
+//
+//                    List<Map<String, Object>> sublist = Arrays.asList(x,y2);
+//
+//
+//                    Map<String, Object> merged = sublist.stream()
+//                            .map(Map::entrySet)
+//                            .flatMap(Set::stream)
+//                            .distinct()
+//                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+//                    lists.add(merged);
     }
 
     /**

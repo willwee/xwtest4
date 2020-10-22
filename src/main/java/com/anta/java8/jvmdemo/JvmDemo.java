@@ -106,7 +106,31 @@ public class JvmDemo implements IWTest {
 
 	@Test
 	public void test11() {
-		System.out.println("test git update::"+ Instant.now().getEpochSecond());
+
+
+		boolean hasNestedResultMaps = true;
+
+		B b = new B();
+		b.bflag = false;
+
+		hasNestedResultMaps |= b.bflag;
+		System.out.println("test hasNestedResultMaps::"+ hasNestedResultMaps);
 	}
 
+	private class A{
+
+	}
+
+private class B{
+	public boolean isBflag() {
+		return bflag;
+	}
+
+	public void setBflag(boolean bflag) {
+		this.bflag = bflag;
+	}
+
+	private boolean bflag ;
+
+}
 }

@@ -1,4 +1,4 @@
-package com.anta.java8.stream;
+package com.anta.java8.optional;
 
 import org.junit.Test;
 
