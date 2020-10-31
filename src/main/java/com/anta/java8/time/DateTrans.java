@@ -355,5 +355,16 @@ public class DateTrans implements IWTest {
         System.out.println(dateStr2);
     }
 
+    @Test
+    public void test10(){
+        LocalDateTime nowTime = LocalDateTime.now();
+        int hour = nowTime.getHour();
+        int month = nowTime.getMonth().getValue();
+        int year = nowTime.getYear();
+        // 打印当前时间的，小时和年
+        System.out.println(year +"" + month);
+
+    }
+
 
 }

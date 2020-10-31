@@ -51,6 +51,12 @@ public class lsdhTest implements IWTest {
 	}
 
 	@Test
+	public void test100(){
+		Integer i = 7;
+		System.out.println(i == 7);
+	}
+
+	@Test
 	public void  test2(){
 
 		Set<String> retailNameList = new HashSet<>();
