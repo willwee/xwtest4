@@ -1,8 +1,13 @@
 package com.anta.java8;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
  * @author xiaowei
@@ -44,6 +49,41 @@ public class OptionalTest implements IWTest {
 		sql.append("and r.store_channel <> '4' ");
 		sql.append("and r.warehouse_type <> '1' ");
 		System.out.println(sql.toString());
+	}
+
+
+	@Test
+	public void test3(){
+		String ss = "asdf,dfasd";
+
+		// 加盟商货通改造 异步插入待处理中间表
+		CompletableFuture.runAsync(()->{
+			this.testAsync();
+		});
+
+		String[] ssa = ss.split(",");
+		System.out.println(ssa.length);
+	}
+
+	private void testAsync(){
+		System.out.println("sdfsd");
+	}
+
+
+	@Test
+	public void test4(){
+		String ss = "asdf,dfasd";
+		List<String> ss2  = Arrays.stream(StringUtils.split(ss,",")).collect(Collectors.toList());
+
+		List<String> ss3 = ss2.stream().filter(v -> "asdf1".equals(v)).collect(Collectors.toList());
+
+
+		System.out.println(String.format("ss2 大小为 %s,ss3大小为 %s",ss2.size(),ss3.size()));
+	}
+
+	@Test
+	public void test5(){
+		System.out.println(String.format("sap客户档案 %s映射为空，请检查！","aap"));
 	}
 
 	static class Wheel {

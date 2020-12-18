@@ -1,6 +1,7 @@
 package com.anta.java8.stream;
 
 import com.anta.java8.IWTest;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -71,6 +72,43 @@ public class ListToMap implements IWTest {
 		public void setParentModuleId(Long parentModuleId) {
 			this.parentModuleId = parentModuleId;
 		}
+	}
+
+	@Test
+	public void test1(){
+
+		List<Account> tt = new ArrayList<>();
+
+		Account t1 = new Account();
+		t1.setId(1L);
+		t1.setAreaId(1L);
+		t1.setUserName("xx1");
+		tt.add(t1);
+
+		Account t2 = new Account();
+		t2.setId(1L);
+		t2.setAreaId(2L);
+		t2.setUserName("xx2");
+		tt.add(t2);
+
+		Account t3 = new Account();
+		t3.setId(3L);
+		t3.setAreaId(1L);
+		t3.setUserName("xx1");
+		tt.add(t3);
+
+		Account t4 = new Account();
+		t4.setId(4L);
+		t4.setAreaId(1L);
+		t4.setUserName("xx1");
+		tt.add(t4);
+
+		Map<Long,Account> map = tt.stream().collect(Collectors.toMap(Account::getId,Function.identity(),
+				(item1, item2) -> item2));
+
+		System.out.println(tt.size());
+
+
 	}
 
 

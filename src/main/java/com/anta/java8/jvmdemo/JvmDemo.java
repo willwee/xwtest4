@@ -76,6 +76,7 @@ public class JvmDemo implements IWTest {
 				list.add(new StaticObject());
 				System.out.println(Thread.currentThread().getName() + "big-thread" + so.getI());
 			} catch (Exception e) {
+
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
@@ -87,6 +88,7 @@ public class JvmDemo implements IWTest {
 
 		while (true) {
 			try {
+
 				i++;
 				System.out.println(Thread.currentThread().getName() + "simple-thread" + i);
 			} catch (Exception e) {

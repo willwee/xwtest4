@@ -43,4 +43,11 @@ public class StringTest implements IWTest {
             orderFromList.stream().forEach(System.out::println);
         }
     }
+
+
+    @Test
+    public void test4(){
+
+        System.out.println(Math.abs(-1));
+    }
 }

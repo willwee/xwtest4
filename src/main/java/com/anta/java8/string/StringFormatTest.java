@@ -1,10 +1,12 @@
 package com.anta.java8.string;
 
 import com.anta.java8.IWTest;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.context.annotation.Primary;
 
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author xiaowei
@@ -75,4 +77,117 @@ public class StringFormatTest implements IWTest {
 		String s = "XNSZ";
 		System.out.println(s.substring(s.length()-4));
 	}
+
+	@Test
+	public void test6(){
+		Set<String> orderSnSet = new HashSet<>();
+		orderSnSet.add("01");
+		orderSnSet.add("02");
+		System.out.println(StringUtils.join(orderSnSet.toArray(), ","));
+	}
+
+	@Test
+	public void test7(){
+		StringBuilder sql = new StringBuilder("select s.order_sn, s.fx_sap_status ");
+		sql.append("from stm_retail_settle_status s ");
+		sql.append("join stm_retail_settle r on s.order_sn = r.order_sn ");
+		sql.append("where s.push_system = 'FX_SAP' ");
+		sql.append(" and s.fx_sap_status in (0, 2) ");
+		sql.append(" and (r.store_channel <> '4' or r.warehouse_type <> '1') ");
+
+		System.out.println(sql.toString());
+	}
+
+	@Test
+	 public void test8(){
+		//1. 可以在中括号内加上任何想要删除的字符，实际上是一个正则表达式
+		String regExp="[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？]";
+
+		//2. 这里是将特殊字符换为空字符串,""代表直接去掉
+		String replace = " ";
+
+		//3. 要处理的字符串
+		String str = "HSFServiceAddressNotFoundException-\n" +
+				"error message : [HSF-Consumer] can't find target service addresses, target serviceName:com.baison.e3.middleware.gateway.api.wms.settlement.IFxsSettlementToPosServi";
+		str = str.replaceAll(regExp,replace);
+		System.out.println("去除特殊字符后的值："+ str);
+	 }
+
+	@Test
+	public void test9(){
+		List<Data> ll = new ArrayList<>();
+		Data d1 = new Data("jjwhFXSC","6901776911382",1604648346L);
+		Data d2 = new Data("jjwhFXSC","6901776911382",1604648287L);
+		Data d3 = new Data("jjwhFXSC","6901776911382",1604648226L);
+		Data d4 = new Data("jjwhFXSC","6919370887835",1604648346L);
+		Data d5 = new Data("jjwhFXSC","6919370887835",1604648347L);
+//		Data d6 = new Data("CK_SF_QZC_2_SX","6919370887835",1604648347L);
+//		Data d7 = new Data("CK_SF_QZC_2_SX","6901776911382",1604648346L);
+//		ll.add(d1);
+//		ll.add(d2);
+//		ll.add(d3);
+//		ll.add(d4);
+//		ll.add(d5);
+//		ll.add(d6);
+//		ll.add(d7);
+		Map<String,Data> ll2= ll.stream().collect(Collectors.groupingBy(Data::getBarcode,
+				Collectors.collectingAndThen(Collectors.reducing(( c1, c2) -> c1.getDjrq() > c2.getDjrq() ? c1 : c2), Optional::get)));
+		List<Data> dds = ll2.values().stream().collect(Collectors.toList());
+
+		System.out.println("");
+
+	}
+
+
+
+	 static class Data {
+		String ckdm;
+		String barcode;
+		Long djrq;
+
+		 Data(String ckdm,String barcode,Long djrq){
+		 	this.barcode = barcode;
+		 	this.ckdm = ckdm;
+		 	this.djrq = djrq;
+
+		 }
+
+		 public String getCkdm() {
+			 return ckdm;
+		 }
+
+		 public void setCkdm(String ckdm) {
+			 this.ckdm = ckdm;
+		 }
+
+		 public String getBarcode() {
+			 return barcode;
+		 }
+
+		 public void setBarcode(String barcode) {
+			 this.barcode = barcode;
+		 }
+
+		 public Long getDjrq() {
+			 return djrq;
+		 }
+
+		 public void setDjrq(Long djrq) {
+			 this.djrq = djrq;
+		 }
+	 }
+
+	 @Test
+	 public void test10(){
+		Set<String> orderSnSet = new HashSet<>();
+		 orderSnSet.add("001");
+		 orderSnSet.add("001");
+		 orderSnSet.add("002");
+
+		 List<String> orderSnList = orderSnSet.stream().collect(Collectors.toList());
+
+		 orderSnList.add("004");
+
+		 System.out.println("test over");
+	 }
 }
