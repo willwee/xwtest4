@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.anta.java8.generator.mapper.StkSapPreMapper" >
+  <resultMap id="BaseResultMap" type="com.anta.java8.generator.model.StkSapPre" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="iflag" property="iflag" jdbcType="VARCHAR" />
+    <result column="sapbillno" property="sapbillno" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="trycount" property="trycount" jdbcType="TINYINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastchanged" property="lastchanged" jdbcType="TIMESTAMP" />
+    <result column="requrl" property="requrl" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.anta.java8.generator.model.StkSapPre" extends="BaseResultMap" >
+    <result column="reqdata" property="reqdata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, iflag, sapbillno, status, trycount, createtime, lastchanged, requrl, remark
+  </sql>
+  <sql id="Blob_Column_List" >
+    reqdata
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from stk_sap_pre
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from stk_sap_pre
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anta.java8.generator.model.StkSapPre" >
+    insert into stk_sap_pre (id, type, iflag, 
+      sapbillno, status, trycount, 
+      createtime, lastchanged, requrl, 
+      remark, reqdata)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, #{iflag,jdbcType=VARCHAR}, 
+      #{sapbillno,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{trycount,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastchanged,jdbcType=TIMESTAMP}, #{requrl,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{reqdata,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.anta.java8.generator.model.StkSapPre" >
+    insert into stk_sap_pre
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="iflag != null" >
+        iflag,
+      </if>
+      <if test="sapbillno != null" >
+        sapbillno,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="trycount != null" >
+        trycount,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastchanged != null" >
+        lastchanged,
+      </if>
+      <if test="requrl != null" >
+        requrl,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="reqdata != null" >
+        reqdata,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="iflag != null" >
+        #{iflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sapbillno != null" >
+        #{sapbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="trycount != null" >
+        #{trycount,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchanged != null" >
+        #{lastchanged,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requrl != null" >
+        #{requrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="reqdata != null" >
+        #{reqdata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anta.java8.generator.model.StkSapPre" >
+    update stk_sap_pre
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="iflag != null" >
+        iflag = #{iflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sapbillno != null" >
+        sapbillno = #{sapbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="trycount != null" >
+        trycount = #{trycount,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchanged != null" >
+        lastchanged = #{lastchanged,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requrl != null" >
+        requrl = #{requrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="reqdata != null" >
+        reqdata = #{reqdata,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.anta.java8.generator.model.StkSapPre" >
+    update stk_sap_pre
+    set type = #{type,jdbcType=TINYINT},
+      iflag = #{iflag,jdbcType=VARCHAR},
+      sapbillno = #{sapbillno,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      trycount = #{trycount,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastchanged = #{lastchanged,jdbcType=TIMESTAMP},
+      requrl = #{requrl,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      reqdata = #{reqdata,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.anta.java8.generator.model.StkSapPre" >
+    update stk_sap_pre
+    set type = #{type,jdbcType=TINYINT},
+      iflag = #{iflag,jdbcType=VARCHAR},
+      sapbillno = #{sapbillno,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      trycount = #{trycount,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastchanged = #{lastchanged,jdbcType=TIMESTAMP},
+      requrl = #{requrl,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
