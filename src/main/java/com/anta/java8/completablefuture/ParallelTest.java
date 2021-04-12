@@ -158,5 +158,11 @@ public class ParallelTest {
         List<String> ss = Arrays.asList("001","002","003");
         ss.parallelStream();
     }
+    @Test
+    public void test11(){
+        Integer a = -1;
+        Integer b = 1;
+        System.out.println(a+b);
+    }
 }
 

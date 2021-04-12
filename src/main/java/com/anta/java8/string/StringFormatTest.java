@@ -2,11 +2,14 @@ package com.anta.java8.string;
 
 import com.anta.java8.IWTest;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.junit.Test;
 import org.springframework.context.annotation.Primary;
 
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author xiaowei
@@ -51,6 +54,14 @@ public class StringFormatTest implements IWTest {
 	public void test3(){
 		System.out.printf("50元的书打8.5折扣是：%d 元%n", 80);
 		System.out.printf("年-月-日 HH:MM:SS 格式：%tF %<tT%n",new Date());
+
+		System.out.printf("年-月-日 HH:MM:SS 格式：%tF %<tT%n",new Date());
+
+
+		System.out.printf("时间为 %tF %<tT%n",new Date());
+
+		System.out.println(String.format("获取需要处理的orderSn为空，请检查！时间为 %tF %<tT",new Date()));
+
 	}
 
 	@Test
@@ -113,69 +124,7 @@ public class StringFormatTest implements IWTest {
 		System.out.println("去除特殊字符后的值："+ str);
 	 }
 
-	@Test
-	public void test9(){
-		List<Data> ll = new ArrayList<>();
-		Data d1 = new Data("jjwhFXSC","6901776911382",1604648346L);
-		Data d2 = new Data("jjwhFXSC","6901776911382",1604648287L);
-		Data d3 = new Data("jjwhFXSC","6901776911382",1604648226L);
-		Data d4 = new Data("jjwhFXSC","6919370887835",1604648346L);
-		Data d5 = new Data("jjwhFXSC","6919370887835",1604648347L);
-//		Data d6 = new Data("CK_SF_QZC_2_SX","6919370887835",1604648347L);
-//		Data d7 = new Data("CK_SF_QZC_2_SX","6901776911382",1604648346L);
-//		ll.add(d1);
-//		ll.add(d2);
-//		ll.add(d3);
-//		ll.add(d4);
-//		ll.add(d5);
-//		ll.add(d6);
-//		ll.add(d7);
-		Map<String,Data> ll2= ll.stream().collect(Collectors.groupingBy(Data::getBarcode,
-				Collectors.collectingAndThen(Collectors.reducing(( c1, c2) -> c1.getDjrq() > c2.getDjrq() ? c1 : c2), Optional::get)));
-		List<Data> dds = ll2.values().stream().collect(Collectors.toList());
 
-		System.out.println("");
-
-	}
-
-
-
-	 static class Data {
-		String ckdm;
-		String barcode;
-		Long djrq;
-
-		 Data(String ckdm,String barcode,Long djrq){
-		 	this.barcode = barcode;
-		 	this.ckdm = ckdm;
-		 	this.djrq = djrq;
-
-		 }
-
-		 public String getCkdm() {
-			 return ckdm;
-		 }
-
-		 public void setCkdm(String ckdm) {
-			 this.ckdm = ckdm;
-		 }
-
-		 public String getBarcode() {
-			 return barcode;
-		 }
-
-		 public void setBarcode(String barcode) {
-			 this.barcode = barcode;
-		 }
-
-		 public Long getDjrq() {
-			 return djrq;
-		 }
-
-		 public void setDjrq(Long djrq) {
-			 this.djrq = djrq;
-		 }
-	 }
 
 	 @Test
 	 public void test10(){
@@ -190,4 +139,94 @@ public class StringFormatTest implements IWTest {
 
 		 System.out.println("test over");
 	 }
+
+	 @Test
+	 public void test11(){
+
+		 RetailOrderBill retailOrderBill = new RetailOrderBill();
+
+		 String code = Optional.ofNullable(retailOrderBill.getWarehouse()).map(v -> v.getCode()).orElse(null);
+
+		 System.out.println(code);
+
+		 System.out.println("\ufeff".getBytes());
+	 }
+
+
+	 static class RetailOrderBill{
+
+		private Warehouse warehouse;
+
+		 public Warehouse getWarehouse() {
+			 return warehouse;
+		 }
+
+		 public void setWarehouse(Warehouse warehouse) {
+			 this.warehouse = warehouse;
+		 }
+	 }
+
+	static class Warehouse {
+		private String code;
+
+		public String getCode() {
+			return code;
+		}
+
+		public void setCode(String code) {
+			this.code = code;
+		}
+	}
+
+	enum StatusEnum{
+		UNCONFIRMED(0,"未确认"), CONFIRMED(1,"已确认"),COMPLETE(8,"已完成"), TREM(9,"终止");
+
+		private Integer status;
+
+		private String name;
+
+		StatusEnum(Integer status,String name){
+			this.name = name;
+			this.status = status;
+		}
+
+		public Integer getStatus() {
+			return status;
+		}
+
+		public void setStatus(Integer status) {
+			this.status = status;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+
+		// Implementing a fromString method on an enum type
+		private static final Map<Integer, StatusEnum> statusToEnum =
+				Stream.of(StatusEnum.values()).collect(Collectors.toMap(StatusEnum::getStatus, e -> e));
+		// Returns Operation for string, if any
+		public static Optional<StatusEnum> fromStatus(Integer dbStatus) {
+			return Optional.ofNullable(statusToEnum.get(dbStatus));
+	    }
+
+
+	}
+
+	@Test
+	public void test12(){
+
+		StatusEnum.fromStatus(10).ifPresent(statusEnum -> {
+			System.out.println(statusEnum.getName());
+		});
+		System.out.println("over");
+	}
+
+
+
 }
