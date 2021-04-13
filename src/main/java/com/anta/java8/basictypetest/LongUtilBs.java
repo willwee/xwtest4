@@ -1,4 +1,4 @@
-package com.anta.java8.lang;
+package com.anta.java8.basictypetest;
 
 public class LongUtilBs {
 

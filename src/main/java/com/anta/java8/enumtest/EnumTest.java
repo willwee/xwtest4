@@ -1,6 +1,7 @@
 package com.anta.java8.enumtest;
 
 import com.anta.java8.IWTest;
+import jdk.net.SocketFlow;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -202,6 +203,12 @@ public class EnumTest implements IWTest {
 				System.out.println(day.getName()+day.getValue());
 				break;
 		}
+	}
+
+
+	@Test
+	public void testStatuEnum(){
+		System.out.println(StatusEnum.fromStatus(0).get().getStatus());
 	}
 
 

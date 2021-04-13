@@ -1,4 +1,4 @@
-package com.anta.java8.lsdh;
+package com.anta.java8.biz;
 
 import com.anta.java8.IWTest;
 import org.junit.Test;

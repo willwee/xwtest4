@@ -1,4 +1,4 @@
-package com.anta.java8.string;
+package com.anta.java8.basictypetest;
 
 import com.anta.java8.IWTest;
 import org.apache.commons.lang3.StringUtils;

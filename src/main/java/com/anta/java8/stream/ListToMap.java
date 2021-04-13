@@ -1,9 +1,7 @@
 package com.anta.java8.stream;
 
 import com.anta.java8.IWTest;
-import com.anta.java8.string.StringFormatTest;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.junit.Test;
 
 import java.text.MessageFormat;

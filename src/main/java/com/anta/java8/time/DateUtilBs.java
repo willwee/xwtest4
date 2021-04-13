@@ -1,6 +1,6 @@
 package com.anta.java8.time;
 
-import com.anta.java8.lang.LongUtilBs;
+import com.anta.java8.basictypetest.LongUtilBs;
 import org.junit.Test;
 
 import java.text.ParseException;
